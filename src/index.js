@@ -271,9 +271,21 @@ class Reader extends Component {
       objectFit: 'contain',
       ...style,
     }
+    const containerStyle = {
+      overflow: 'hidden',
+      position: 'relative',
+      width: '100%',
+      paddingTop: '100%',
+    }
 
     return (
       <section className={className}>
+      <section style={containerStyle}>
+      {
+            (!legacyMode)
+            ? <div style={viewFinderStyle} />
+            : null
+          }
         {legacyMode
           ? <div>
             <input
@@ -288,6 +300,7 @@ class Reader extends Component {
           : <video style={previewStyle} ref={this.setRefFactory('preview')} />}
         <canvas style={hiddenStyle} ref={this.setRefFactory('canvas')} />
       </section>
+         </section>
     )
   }
 }
